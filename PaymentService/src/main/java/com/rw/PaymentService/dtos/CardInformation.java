@@ -15,11 +15,6 @@ public class CardInformation {
     private String number;
     private Expiry expiry;
     private String securityCode;
-//    private String brand;
-//    private String fundingMethod;
-//    private String issuer;
-//    private String scheme;
-//    private String storedOnFile;
 
     @Data
     @AllArgsConstructor
