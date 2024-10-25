@@ -1,39 +1,27 @@
 package com.rw.PaymentService.controller;
 
 import com.rw.PaymentService.dtos.PaymentRequest;
+import com.rw.PaymentService.dtos.PaymentResponse;
 import com.rw.PaymentService.service.MasterCardService;
+import com.rw.PaymentService.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/mastercard")
+@RequestMapping("/api/v1/mastercard")
 @RequiredArgsConstructor
 public class MasterCardController {
     private final MasterCardService masterCardService;
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<String> authenticate() {
-        return ResponseEntity.ok(masterCardService.authenticate());
-    }
-
-    @PostMapping("/payments/initiate")
-    public ResponseEntity<String> initiatePayment(@RequestBody PaymentRequest paymentRequest) {
-        return ResponseEntity.ok(masterCardService.initiatePayment(paymentRequest));
-    }
-
-    @GetMapping("/payments/status/{transactionId}")
-    public ResponseEntity<String> checkTransactionStatus(@PathVariable(name = "transactionId") String transactionId) {
-        return ResponseEntity.ok(masterCardService.checkTransactionStatus(transactionId));
-    }
-
-    @PostMapping("/payments/refund")
-    public ResponseEntity<String> refundPayment(@RequestBody String transactionId) {
-        return ResponseEntity.ok(masterCardService.refundPayment(transactionId));
-    }
-
-    @GetMapping("/accounts/{accountId}")
-    public ResponseEntity<String> getAccountDetails(@PathVariable(name = "accountId") String accountId) {
-        return ResponseEntity.ok(masterCardService.getAccountDetails(accountId));
+    @PutMapping("/merchant/{merchantId}/order/{orderId}/transaction/{transactionId}")
+    public ResponseEntity<ApiResponse<PaymentResponse>> processPayment(
+            @PathVariable String merchantId,
+            @PathVariable String orderId,
+            @PathVariable String transactionId,
+            @RequestBody PaymentRequest paymentRequest
+    ) {
+        PaymentResponse paymentResponse = masterCardService.processPayment(merchantId, orderId, transactionId, paymentRequest);
+        return ResponseEntity.ok(ApiResponse.<PaymentResponse>builder().status(201).message("Payment successful").data(paymentResponse).build());
     }
 }
