@@ -15,7 +15,7 @@ export const useCardPayment = (props: ICardPaymentProps) => {
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [paymentSuccess, setPaymentSuccess] = useState<boolean>(false);
 
-  const { cardNumber, cardHolder, cardExpiration, cardCVV } = props;
+  const { cardNumber, cardCVV } = props;
   const handlePayment = async () => {
     setIsPaymentLoading(true);
 
@@ -35,36 +35,34 @@ export const useCardPayment = (props: ICardPaymentProps) => {
           card: {
             number: cardNumber,
             expiry: {
-              month: cardExpiration.split("/")[0],
-              year: cardExpiration.split("/")[1],
+              month: '3',
+              year: '77',
             },
             securityCode: cardCVV,
           },
         },
       },
     };
+
     await axios
-      .post(
-        `localhost:8080/api/v1/mastercard/${merchantId}/order/${orderId}/transaction/${transactionId}`,
-        {
-          paymentRequest,
-        }
+      .put(
+        `http://localhost:8080/api/v1/mastercard/merchant/${merchantId}/order/${orderId}/transaction/${transactionId}`, paymentRequest
       )
       .then(() => {
         setIsPaymentLoading(false);
         setPaymentSuccess(true);
+        setPaymentError(null);
       })
       .catch((error) => {
         setIsPaymentLoading(false);
         setPaymentError(error.message);
+        setPaymentSuccess(false);
       });
+
+      setIsPaymentLoading(false);
   };
   return {
     handlePayment,
-    cardNumber,
-    cardHolder,
-    cardExpiration,
-    cardCVV,
     isPaymentLoading,
     paymentError,
     paymentSuccess,
