@@ -6,6 +6,8 @@ import com.rw.PaymentService.service.MasterCardService;
 import com.rw.PaymentService.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class MasterCardController {
     private final MasterCardService masterCardService;
+
 
     @PutMapping("/merchant/{merchantId}/order/{orderId}/transaction/{transactionId}")
     public ResponseEntity<ApiResponse<PaymentResponse>> processPayment(
