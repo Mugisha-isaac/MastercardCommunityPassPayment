@@ -14,12 +14,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderResponse {
     @JsonProperty("amount")
-    private String amount;  // Changed to String to handle potential decimal values
-    private String authenticationStatus;  // Changed from enum to String
+    private String amount;
+    private String authenticationStatus;
     private Chargeback chargeback;
     private String creationTime;
     private String currency;
-    private String id;  // Changed from UUID to String
+    private String id;
     private String lastUpdatedTime;
     private String merchantAmount;
     private String merchantCategoryCode;
