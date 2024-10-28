@@ -15,7 +15,7 @@ export const useCardPayment = (props: ICardPaymentProps) => {
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [paymentSuccess, setPaymentSuccess] = useState<boolean>(false);
 
-  const { cardNumber, cardCVV } = props;
+  const { cardNumber, cardCVV, cardExpiration } = props;
   const handlePayment = async () => {
     setIsPaymentLoading(true);
 
@@ -35,8 +35,8 @@ export const useCardPayment = (props: ICardPaymentProps) => {
           card: {
             number: cardNumber,
             expiry: {
-              month: '3',
-              year: '77',
+              month: cardExpiration.split("-")[1].slice(-1),
+              year: cardExpiration.split("-")[0].slice(-2)
             },
             securityCode: cardCVV,
           },
