@@ -10,16 +10,39 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useCardPaymentRefund } from "@/hooks/useCardPaymentRefund";
 import { IPaymentRefundFormData } from "@/types/payment-refund-form";
 import { Label } from "@radix-ui/react-label";
-import { useState } from "react";
-import { Toaster } from "react-hot-toast";
+import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Refund() {
   const [refundFormData, setRefundFormData] = useState<IPaymentRefundFormData>({
     orderId: "",
     amount: 0,
   });
+
+  const { handleRefund, refundPending, refundError, refundSuccess } =
+    useCardPaymentRefund(refundFormData);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await handleRefund();
+  };
+
+  useEffect(() => {
+    if (
+      refundError != null &&
+      refundError !== "" &&
+      !refundPending &&
+      !refundSuccess
+    ) {
+      toast.error(refundError);
+    }
+    if (refundSuccess && !refundPending && refundError === null) {
+      toast.success("Refund successful");
+    }
+  }, [refundPending]);
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -63,7 +86,7 @@ export default function Refund() {
             </form>
           </CardContent>
           <CardFooter className="flex justify-between">
-            <Button>Refund</Button>
+            <Button onClick={handleSubmit}>Refund</Button>
           </CardFooter>
         </Card>
       </main>

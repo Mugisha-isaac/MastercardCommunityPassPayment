@@ -36,7 +36,7 @@ export const useCardPayment = (props: ICardPaymentProps) => {
             number: cardNumber,
             expiry: {
               month: cardExpiration.split("-")[1].slice(-1),
-              year: cardExpiration.split("-")[0].slice(-2)
+              year: cardExpiration.split("-")[0].slice(-2),
             },
             securityCode: cardCVV,
           },
@@ -46,7 +46,8 @@ export const useCardPayment = (props: ICardPaymentProps) => {
 
     await axios
       .put(
-        `http://localhost:8080/api/v1/mastercard/pay/merchant/${merchantId}/order/${orderId}/transaction/${transactionId}`, paymentRequest
+        `http://localhost:8080/api/v1/mastercard/pay/merchant/${merchantId}/order/${orderId}/transaction/${transactionId}`,
+        paymentRequest
       )
       .then(() => {
         setIsPaymentLoading(false);
@@ -59,7 +60,7 @@ export const useCardPayment = (props: ICardPaymentProps) => {
         setPaymentSuccess(false);
       });
 
-      setIsPaymentLoading(false);
+    setIsPaymentLoading(false);
   };
   return {
     handlePayment,

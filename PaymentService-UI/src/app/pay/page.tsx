@@ -18,39 +18,37 @@ import { useCardPayment } from "@/hooks/useCardPayment";
 import { IPaymentFormData } from "@/types/payment-form-data";
 
 export default function Pay() {
+  const [formData, setFormData] = useState<IPaymentFormData>({
+    cardNumber: "",
+    cardHolder: "",
+    cardExpiration: "",
+    cardCVV: "",
+  });
 
-    const [formData, setFormData] = useState<IPaymentFormData>({
-        cardNumber: "",
-        cardHolder: "",
-        cardExpiration: "",
-        cardCVV: "",
-      });
-    
-    
-      const { handlePayment, isPaymentLoading, paymentError, paymentSuccess } =
-        useCardPayment(formData);
-    
-      const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        await handlePayment();
-      };
-    
-      useEffect(() => {
-        if (
-          paymentError != null &&
-          paymentError !== "" &&
-          !isPaymentLoading &&
-          !paymentSuccess
-        ) {
-          toast.error(paymentError);
-        }
-        if (paymentSuccess && !isPaymentLoading && paymentError === null) {
-          toast.success("Payment successful");
-        }
-      }, [isPaymentLoading]);
+  const { handlePayment, isPaymentLoading, paymentError, paymentSuccess } =
+    useCardPayment(formData);
 
-    return(
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await handlePayment();
+  };
+
+  useEffect(() => {
+    if (
+      paymentError != null &&
+      paymentError !== "" &&
+      !isPaymentLoading &&
+      !paymentSuccess
+    ) {
+      toast.error(paymentError);
+    }
+    if (paymentSuccess && !isPaymentLoading && paymentError === null) {
+      toast.success("Payment successful");
+    }
+  }, [isPaymentLoading]);
+
+  return (
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <Toaster position="top-right" reverseOrder={false} />
       <main className="flex items-center justify-center  mt-80 gap-10">
         <Card className="w-[400px]">
@@ -118,8 +116,8 @@ export default function Pay() {
             <Button variant="outline">Cancel</Button>
             <Button onClick={handleSubmit}>Pay</Button>
           </CardFooter>
-        </Card> 
+        </Card>
       </main>
     </div>
-    )
+  );
 }

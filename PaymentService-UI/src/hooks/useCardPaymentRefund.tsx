@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { v4 } from "uuid";
 import axios from "axios";
+import { IPaymentRefundFormData } from "@/types/payment-refund-form";
 
-interface ICardPaymentRefundProps {
-  orderId: string;
-  amount: string;
-}
-
-export const useCardPaymentRefund = (props: ICardPaymentRefundProps) => {
+export const useCardPaymentRefund = (props: IPaymentRefundFormData) => {
   const [refundPending, setRefundPending] = useState(false);
   const [refundError, setRefundError] = useState<string | null>(null);
   const [refundSuccess, setRefundSuccess] = useState<boolean>(false);
@@ -22,7 +18,7 @@ export const useCardPaymentRefund = (props: ICardPaymentRefundProps) => {
 
     const refundRequest = {
       apiOperation: "REFUND",
-      order: {
+      transaction: {
         amount: amount,
         currency: "USD",
       },
