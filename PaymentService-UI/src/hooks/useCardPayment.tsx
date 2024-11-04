@@ -46,7 +46,7 @@ export const useCardPayment = (props: ICardPaymentProps) => {
 
     await axios
       .put(
-        `http://localhost:8080/api/v1/pay/mastercard/merchant/${merchantId}/order/${orderId}/transaction/${transactionId}`, paymentRequest
+        `http://localhost:8080/api/v1/mastercard/pay/merchant/${merchantId}/order/${orderId}/transaction/${transactionId}`, paymentRequest
       )
       .then(() => {
         setIsPaymentLoading(false);
