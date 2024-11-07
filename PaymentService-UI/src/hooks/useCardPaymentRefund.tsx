@@ -15,6 +15,7 @@ export const useCardPaymentRefund = (props: IPaymentRefundFormData) => {
 
     const transactionId = v4();
     const merchantId = process.env.NEXT_PUBLIC_MarchantId;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
     const refundRequest = {
       apiOperation: "REFUND",
@@ -26,7 +27,7 @@ export const useCardPaymentRefund = (props: IPaymentRefundFormData) => {
 
     await axios
       .put(
-        `http://localhost:8080/api/v1/mastercard/refund/merchant/${merchantId}/order/${orderId}/transaction/${transactionId}`,
+        `${baseUrl}/refund/merchant/${merchantId}/order/${orderId}/transaction/${transactionId}`,
         refundRequest
       )
       .then(() => {
@@ -38,6 +39,8 @@ export const useCardPaymentRefund = (props: IPaymentRefundFormData) => {
         setRefundPending(false);
         setRefundError(error.message);
         setRefundSuccess(false);
+      }).finally(() => {
+        setRefundPending(false);
       });
   };
 

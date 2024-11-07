@@ -23,6 +23,7 @@ export default function Pay() {
     cardHolder: "",
     cardExpiration: "",
     cardCVV: "",
+    amount: 0,
   });
 
   const { handlePayment, isPaymentLoading, paymentError, paymentSuccess } =
@@ -34,23 +35,22 @@ export default function Pay() {
   };
 
   useEffect(() => {
-    if (
-      paymentError != null &&
-      paymentError !== "" &&
-      !isPaymentLoading &&
-      !paymentSuccess
-    ) {
+    if (paymentError !== null && paymentError !== "" && !isPaymentLoading && !paymentSuccess) {
       toast.error(paymentError);
-    }
-    if (paymentSuccess && !isPaymentLoading && paymentError === null) {
+    } else if (paymentSuccess && !isPaymentLoading && paymentError === null) {
       toast.success("Payment successful");
+    } else if (isPaymentLoading) {
+      const toastId = toast.loading("Processing payment...");
+      return () => {
+        toast.dismiss(toastId);
+      };
     }
-  }, [isPaymentLoading]);
+  }, [isPaymentLoading, paymentError, paymentSuccess]);
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="items-center justify-items-center min-h-screen p-10">
       <Toaster position="top-right" reverseOrder={false} />
-      <main className="flex items-center justify-center  mt-80 gap-10">
+      <main className="flex items-center justify-center  gap-10 ">
         <Card className="w-[400px]">
           <CardHeader>
             <CardTitle>Checkout</CardTitle>
@@ -79,6 +79,20 @@ export default function Pay() {
                     placeholder="Enter your card number"
                     onChange={(e) =>
                       setFormData({ ...formData, cardNumber: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="amount">Amount</Label>
+                  <Input
+                    id="amount"
+                    type="number"
+                    placeholder="Enter the amount"
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        amount: parseInt(e.target.value),
+                      })
                     }
                   />
                 </div>

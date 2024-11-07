@@ -5,4 +5,5 @@ export interface IPaymentFormData{
     cardHolder: string;
     cardExpiration: string;
     cardCVV: string;
+    amount: number;
 }

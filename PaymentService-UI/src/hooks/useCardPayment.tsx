@@ -2,31 +2,26 @@ import { v4 } from "uuid";
 import axios from "axios";
 import { IPaymentRequest } from "@/types/payment-request";
 import { useState } from "react";
+import { IPaymentFormData } from "@/types/payment-form-data";
 
-interface ICardPaymentProps {
-  cardNumber: string;
-  cardHolder: string;
-  cardExpiration: string;
-  cardCVV: string;
-}
-
-export const useCardPayment = (props: ICardPaymentProps) => {
+export const useCardPayment = (props: IPaymentFormData) => {
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [paymentSuccess, setPaymentSuccess] = useState<boolean>(false);
 
-  const { cardNumber, cardCVV, cardExpiration } = props;
+  const { cardNumber, cardCVV, cardExpiration, amount } = props;
   const handlePayment = async () => {
     setIsPaymentLoading(true);
 
     const orderId = v4();
     const transactionId = v4();
     const merchantId = process.env.NEXT_PUBLIC_MarchantId;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
     const paymentRequest: IPaymentRequest = {
       apiOperation: "PAY",
       order: {
-        amount: "100",
+        amount: amount,
         currency: "USD",
       },
       sourceOfFunds: {
@@ -46,7 +41,7 @@ export const useCardPayment = (props: ICardPaymentProps) => {
 
     await axios
       .put(
-        `http://localhost:8080/api/v1/mastercard/pay/merchant/${merchantId}/order/${orderId}/transaction/${transactionId}`,
+        `${baseUrl}/pay/merchant/${merchantId}/order/${orderId}/transaction/${transactionId}`,
         paymentRequest
       )
       .then(() => {
@@ -58,9 +53,9 @@ export const useCardPayment = (props: ICardPaymentProps) => {
         setIsPaymentLoading(false);
         setPaymentError(error.message);
         setPaymentSuccess(false);
+      }).finally(() => {
+        setIsPaymentLoading(false);
       });
-
-    setIsPaymentLoading(false);
   };
   return {
     handlePayment,

@@ -1,7 +1,7 @@
 export interface IPaymentRequest{
     apiOperation: string;
     order: {
-        amount: string;
+        amount: number;
         currency: string;
     };
     sourceOfFunds: {
