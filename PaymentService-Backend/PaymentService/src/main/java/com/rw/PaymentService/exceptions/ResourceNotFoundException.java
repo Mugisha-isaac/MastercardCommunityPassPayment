@@ -1,20 +1,26 @@
 package com.rw.PaymentService.exceptions;
 
 
+import com.rw.PaymentService.util.ErrorDetail;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
 @Getter
-@AllArgsConstructor
 public class ResourceNotFoundException extends RuntimeException {
-    private String message = "exceptions.notfound";
-    private Object[] args;
+    private final ErrorDetail errorDetail;
+    private final Object[] args;
 
-    public ResourceNotFoundException(Object... args) {
-        super("Message");
+    public ResourceNotFoundException(String message, ErrorDetail errorDetail) {
+        super(message);
+        this.errorDetail = errorDetail;
+        this.args = null;
+    }
+
+    public ResourceNotFoundException(String message, Object[] args) {
+        super(message);
         this.args = args;
+        this.errorDetail = null;
     }
 }

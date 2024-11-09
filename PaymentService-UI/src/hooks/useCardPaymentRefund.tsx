@@ -37,7 +37,7 @@ export const useCardPaymentRefund = (props: IPaymentRefundFormData) => {
       })
       .catch((error) => {
         setRefundPending(false);
-        setRefundError(error.message);
+        setRefundError(error.response.data.message);
         setRefundSuccess(false);
       }).finally(() => {
         setRefundPending(false);

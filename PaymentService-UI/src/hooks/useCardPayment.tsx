@@ -50,8 +50,9 @@ export const useCardPayment = (props: IPaymentFormData) => {
         setPaymentError(null);
       })
       .catch((error) => {
+        console.error(error);
         setIsPaymentLoading(false);
-        setPaymentError(error.message);
+        setPaymentError(error.response.data.message);
         setPaymentSuccess(false);
       }).finally(() => {
         setIsPaymentLoading(false);

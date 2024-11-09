@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,8 +16,26 @@ import java.time.LocalDateTime;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponse<T> {
-    private int status;
-    private Object message;
     private T data;
-    private final String timestamp = LocalDateTime.now().toString();
+    private Integer status;
+    private String message;
+    private ErrorDetail error;
+    private String result;
+
+    public static <T> ApiResponse<T> successResponse(T data) {
+        ApiResponse<T> response = new ApiResponse<>();
+        response.setData(data);
+        response.setStatus(HttpStatus.OK.value());
+        response.setResult("SUCCESS");
+        return response;
+    }
+
+    public static ApiResponse<?> errorResponse(Integer status, String message, ErrorDetail error) {
+        ApiResponse<?> response = new ApiResponse<>();
+        response.setStatus(status);
+        response.setMessage(message);
+        response.setError(error);
+        response.setResult("ERROR");
+        return response;
+    }
 }
