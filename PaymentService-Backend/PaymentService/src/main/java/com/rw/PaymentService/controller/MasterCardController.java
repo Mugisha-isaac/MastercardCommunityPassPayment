@@ -1,5 +1,6 @@
 package com.rw.PaymentService.controller;
 
+import com.rw.PaymentService.dtos.InitialiseAuthentication.InitiateAuthenticationRequest;
 import com.rw.PaymentService.dtos.PaymentRequest;
 import com.rw.PaymentService.dtos.PaymentResponse;
 import com.rw.PaymentService.dtos.RefundRequest;
@@ -47,5 +48,15 @@ public class MasterCardController {
     ) {
 
         return ResponseEntity.ok(ApiResponse.successResponse(masterCardService.processRefund(merchantId, orderId, transactionId, refundRequest)));
+    }
+
+    @PutMapping("/initiateAuthentication/merchant/{merchantId}/order/{orderId}/transaction/{transactionId}")
+    public ResponseEntity<Object> initiateAuthentication(
+            @PathVariable String merchantId,
+            @PathVariable String orderId,
+            @PathVariable String transactionId,
+            @RequestBody InitiateAuthenticationRequest request
+    ) {
+        return ResponseEntity.ok(ApiResponse.successResponse(masterCardService.initiateAuthentication(merchantId, orderId, transactionId, request)));
     }
 }

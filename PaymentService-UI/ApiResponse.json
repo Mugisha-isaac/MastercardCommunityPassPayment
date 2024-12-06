@@ -1,0 +1,198 @@
+{
+  "status": 200,
+  "message": "Fare Family Details successfully",
+  "data": {
+    "Economy Classic": {
+      "B": [
+        {
+          "attribute": "Upgrade fee",
+          "value": "50% of lowest J Cabin BF"
+        },
+        {
+          "attribute": "Miles Eligibility",
+          "value": "75%"
+        },
+        {
+          "attribute": "No Show Penalty",
+          "value": "No Show Fee Applies(24hrs to departure)"
+        },
+        {
+          "attribute": "Refund Eligibility (After Depature)",
+          "value": "Refundable at a fee"
+        },
+        {
+          "attribute": "Refund Eligibility (Before Depature)",
+          "value": "Refundable at a fee"
+        },
+        {
+          "attribute": "Upgrade Eligibility",
+          "value": "Eligible for upgrade"
+        },
+        {
+          "attribute": "Change date Eligibility",
+          "value": "One Free Change"
+        },
+        {
+          "attribute": "Seat Selection (Pre-seating)",
+          "value": "Fee applies"
+        },
+        {
+          "attribute": "Priority Check-In",
+          "value": "NO"
+        },
+        {
+          "attribute": "Checked Baggage Allowance (Piece concept)",
+          "value": "2 x 23KG"
+        },
+        {
+          "attribute": "Hand Baggage Allowance",
+          "value": "1 x 10KG"
+        }
+      ],
+      "H": [
+        {
+          "attribute": "Hand Baggage Allowance",
+          "value": "1 x 10KG"
+        },
+        {
+          "attribute": "Checked Baggage Allowance (Piece concept)",
+          "value": "2 x 23KG"
+        },
+        {
+          "attribute": "Priority Check-In",
+          "value": "NO"
+        },
+        {
+          "attribute": "Seat Selection (Pre-seating)",
+          "value": "Fee applies"
+        },
+        {
+          "attribute": "Change date Eligibility",
+          "value": "One Free Change"
+        },
+        {
+          "attribute": "Upgrade Eligibility",
+          "value": "Eligible for upgrade"
+        },
+        {
+          "attribute": "Refund Eligibility (Before Depature)",
+          "value": "Refundable at a fee"
+        },
+        {
+          "attribute": "Refund Eligibility (After Depature)",
+          "value": "Refundable at a fee"
+        },
+        {
+          "attribute": "No Show Penalty",
+          "value": "No Show Fee Applies(24hrs to departure)"
+        },
+        {
+          "attribute": "Miles Eligibility",
+          "value": "75%"
+        },
+        {
+          "attribute": "Upgrade fee",
+          "value": "50% of lowest J Cabin BF"
+        }
+      ]
+    },
+    "Economy Saver": {
+      "N": [
+        {
+          "attribute": "Hand Baggage Allowance",
+          "value": "1 x 10KG"
+        },
+        {
+          "attribute": "Checked Baggage Allowance (Piece concept)",
+          "value": "2 x 23KG"
+        },
+        {
+          "attribute": "Priority Check-In",
+          "value": "NO"
+        },
+        {
+          "attribute": "Seat Selection (Pre-seating)",
+          "value": "Fee applies"
+        },
+        {
+          "attribute": "Change date Eligibility",
+          "value": "Fee applies"
+        },
+        {
+          "attribute": "Upgrade Eligibility",
+          "value": "Eligible for upgrade"
+        },
+        {
+          "attribute": "Refund Eligibility (Before Depature)",
+          "value": "Non Refundable"
+        },
+        {
+          "attribute": "Refund Eligibility (After Depature) ",
+          "value": "Non Refundable"
+        },
+        {
+          "attribute": "No Show Penalty",
+          "value": "No Show Fee Applies (24hrs to departure)"
+        },
+        {
+          "attribute": "Miles Eligibility",
+          "value": "50%"
+        },
+        {
+          "attribute": "Upgrade fee",
+          "value": "75% of lowest J Cabin BF"
+        }
+      ],
+      "O": [
+        {
+          "attribute": "Hand Baggage Allowance",
+          "value": "1 x 10KG"
+        },
+        {
+          "attribute": "Checked Baggage Allowance (Piece concept)",
+          "value": "2 x 23KG"
+        },
+        {
+          "attribute": "Priority Check-In",
+          "value": "NO"
+        },
+        {
+          "attribute": "Seat Selection (Pre-seating)",
+          "value": "Fee applies"
+        },
+        {
+          "attribute": "Change date Eligibility",
+          "value": "Fee applies"
+        },
+        {
+          "attribute": "Upgrade Eligibility",
+          "value": "Eligible for upgrade"
+        },
+        {
+          "attribute": "Refund Eligibility (Before Depature)",
+          "value": "Non Refundable"
+        },
+        {
+          "attribute": "Refund Eligibility (After Depature)",
+          "value": "Non Refundable"
+        },
+        {
+          "attribute": "No Show Penalty",
+          "value": "No Show Fee Applies(24hrs to departure)"
+        },
+        {
+          "attribute": "Miles Eligibility",
+          "value": "50%"
+        },
+        {
+          "attribute": "Upgrade fee",
+          "value": "75% of lowest J Cabin BF"
+        }
+      ]
+    }
+  },
+  "meta": null,
+  "dictionaries": null,
+  "timestamp": null,
+  "errors": null
+}
